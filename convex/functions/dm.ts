@@ -1,6 +1,6 @@
 import { Id, Doc } from "../_generated/dataModel";
 import { QueryCtx } from "../_generated/server";
-import { authenticatedQuery } from "./helpers";
+import { authenticatedMutation, authenticatedQuery } from "./helpers";
 import { v } from "convex/values";
 
 export const list = authenticatedQuery({
