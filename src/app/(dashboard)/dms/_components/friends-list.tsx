@@ -1,5 +1,7 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { api } from "../../../../convex/_generated/api";
+import { api } from "../../../../../convex/_generated/api";
 import { useQuery } from "convex/react";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, MessageCircleIcon, XIcon } from "lucide-react";

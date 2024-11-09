@@ -1,9 +1,9 @@
 "use client";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { RedirectToSignIn, SignOutButton } from "@clerk/nextjs";
-import { Authenticated, Unauthenticated, useQuery } from "convex/react";
-import { DashboardSidebar } from "./_components/sidebar";
+import { RedirectToSignIn } from "@clerk/nextjs";
+import { Authenticated, Unauthenticated } from "convex/react";
+import { MainSidebar } from "./main-sidebar";
 
 export default function DashboardLayout({
   children,
@@ -13,8 +13,8 @@ export default function DashboardLayout({
   return (
     <div>
       <Authenticated>
-        <SidebarProvider>
-          <DashboardSidebar />
+        <SidebarProvider defaultOpen={false}>
+          <MainSidebar />
           {children}
         </SidebarProvider>
       </Authenticated>
