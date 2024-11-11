@@ -1,5 +1,9 @@
 import { v } from "convex/values";
-import { authenticatedMutation, authenticatedQuery } from "./helpers";
+import {
+  assertServerMember,
+  authenticatedMutation,
+  authenticatedQuery,
+} from "./helpers";
 
 export const list = authenticatedQuery({
   handler: async (ctx) => {
@@ -30,6 +34,7 @@ export const get = authenticatedQuery({
     id: v.id("servers"),
   },
   handler: async (ctx, { id }) => {
+    await assertServerMember(ctx, id);
     return await ctx.db.get(id);
   },
 });
@@ -39,6 +44,7 @@ export const channels = authenticatedQuery({
     id: v.id("servers"),
   },
   handler: async (ctx, { id }) => {
+    await assertServerMember(ctx, id);
     const channels = await ctx.db
       .query("channels")
       .withIndex("by_serverId", (q) => q.eq("serverId", id))
@@ -52,6 +58,7 @@ export const members = authenticatedQuery({
     id: v.id("servers"),
   },
   handler: async (ctx, { id }) => {
+    await assertServerMember(ctx, id);
     const serverMembers = await ctx.db
       .query("serverMembers")
       .withIndex("by_serverId", (q) => q.eq("serverId", id))
