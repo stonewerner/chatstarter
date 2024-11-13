@@ -1,7 +1,7 @@
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { Id } from "../../../../../convex/_generated/dataModel";
 import { api } from "../../../../../convex/_generated/api";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   SidebarContent,
   SidebarGroup,
@@ -12,14 +12,37 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   Sidebar,
+  SidebarMenuAction,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { CreateChannel } from "./create-channel";
+import { TrashIcon } from "lucide-react";
+import { toast } from "sonner";
 
 export function ServerSidebar({ id }: { id: Id<"servers"> }) {
   const server = useQuery(api.functions.server.get, { id });
   const channels = useQuery(api.functions.channel.list, { id });
   const pathname = usePathname();
+  const removeChannel = useMutation(api.functions.channel.remove);
+  const router = useRouter();
+
+  const handleChannelDelete = async (id: Id<"channels">) => {
+    try {
+      if (server) {
+        router.push(
+          `/servers/${server?._id}/channels/${server?.defaultChannelId}`
+        );
+      }
+      await removeChannel({ id });
+      toast.success("Channel deleted");
+    } catch (error) {
+      toast.error("Failed to delete channel", {
+        description:
+          error instanceof Error ? error.message : "An unknown error occurred",
+      });
+    }
+  };
+
   return (
     <Sidebar className="left-12">
       <SidebarHeader>{server?.name}</SidebarHeader>
@@ -41,6 +64,11 @@ export function ServerSidebar({ id }: { id: Id<"servers"> }) {
                       {channel.name}
                     </Link>
                   </SidebarMenuButton>
+                  <SidebarMenuAction
+                    onClick={() => handleChannelDelete(channel._id)}
+                  >
+                    <TrashIcon />
+                  </SidebarMenuAction>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
