@@ -2,7 +2,12 @@
 
 import { use } from "react";
 import { Id } from "../../../../convex/_generated/dataModel";
-import { useMutation, useQuery } from "convex/react";
+import {
+  Authenticated,
+  Unauthenticated,
+  useMutation,
+  useQuery,
+} from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import {
   Card,
@@ -14,6 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { SignInButton } from "@clerk/nextjs";
 
 export default function JoinPage({
   params,
@@ -43,7 +49,16 @@ export default function JoinPage({
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex flex-col items-stretch gap-2">
-          <Button onClick={handleJoin}>Join Server</Button>
+          <Authenticated>
+            <Button onClick={handleJoin}>Join Server</Button>
+          </Authenticated>
+          <Unauthenticated>
+            <Button asChild>
+              <SignInButton forceRedirectUrl={`/join/${id}`}>
+                Sign In to Join
+              </SignInButton>
+            </Button>
+          </Unauthenticated>
           <Button variant="secondary" asChild>
             <Link href="/dms">Not Now</Link>
           </Button>
