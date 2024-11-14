@@ -21,7 +21,7 @@ import {
   TrashIcon,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useImageUpload } from "@/hooks/use-image-upload";
 
 export function Messages({ id }: { id: Id<"directMessages" | "channels"> }) {

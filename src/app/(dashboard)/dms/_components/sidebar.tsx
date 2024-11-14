@@ -6,16 +6,14 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenuButton,
-  SidebarProvider,
   SidebarMenuItem,
   SidebarMenu,
   SidebarGroupLabel,
-  SidebarGroupAction,
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { SignOutButton } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
-import { PlusIcon, User2Icon } from "lucide-react";
+import { User2Icon } from "lucide-react";
 import Link from "next/link";
 import { api } from "../../../../../convex/_generated/api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

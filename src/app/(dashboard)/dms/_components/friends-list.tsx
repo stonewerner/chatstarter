@@ -22,7 +22,7 @@ export function PendingFriendsList() {
       </h2>
       {friends?.length === 0 && (
         <FriendsListEmpty>
-          You don't have any pending friend requests.
+          You don&apos;t have any pending friend requests.
         </FriendsListEmpty>
       )}
       {friends?.map((friend, index) => (
@@ -58,7 +58,9 @@ export function AcceptedFriendsList() {
         Accepted Friends
       </h2>
       {friends?.length === 0 && (
-        <FriendsListEmpty>You don't have any friends yet.</FriendsListEmpty>
+        <FriendsListEmpty>
+          You don&apos;t have any friends yet.
+        </FriendsListEmpty>
       )}
       {friends?.map((friend, index) => (
         <FriendItem

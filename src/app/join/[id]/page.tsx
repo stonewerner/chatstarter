@@ -44,7 +44,7 @@ export default function JoinPage({
         <CardHeader>
           <CardTitle>Join {invite?.server.name}</CardTitle>
           <CardDescription>
-            You've been invited to join{" "}
+            You&apos;ve been invited to join{" "}
             <span className="font-semibold">{invite?.server.name}</span>
           </CardDescription>
         </CardHeader>
